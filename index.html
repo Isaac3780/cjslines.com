@@ -160,29 +160,27 @@
 
   .contact { margin-top: 40px; }
   .contact-inner {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding: 44px; border-radius: 24px;
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    gap: 14px; padding: 46px 44px; border-radius: 24px; position: relative; overflow: hidden;
     background: linear-gradient(150deg, rgba(18,24,46,.85), rgba(8,11,24,.92));
     border: 1px solid rgba(0,240,255,.28);
   }
-  .contact h2 { font-family: 'Orbitron'; font-weight: 800; font-size: clamp(24px, 3.4vw, 34px); margin: 16px 0 12px; }
-  .contact-copy p { color: var(--muted); font-size: 15px; line-height: 1.7; }
-  .contact-links { display: flex; flex-direction: column; gap: 10px; margin-top: 22px; }
-  .contact-links a { color: var(--cyan); text-decoration: none; font-size: 15px; }
-  .contact-links a:hover { text-shadow: 0 0 14px rgba(0,240,255,.6); }
-  .contact-form { display: flex; flex-direction: column; gap: 12px; }
-  .contact-form input, .contact-form textarea {
-    width: 100%; padding: 14px 16px; border-radius: 12px; font-size: 15px; font-family: inherit;
-    background: rgba(0,240,255,.05); border: 1px solid rgba(0,240,255,.3); color: var(--text);
-    outline: none; transition: .25s;
+  .contact-inner::before {
+    content: ''; position: absolute; inset: 0; border-radius: 24px; padding: 1px;
+    background: linear-gradient(140deg, rgba(0,240,255,.9), transparent 45%, transparent 60%, rgba(255,43,214,.8));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude; opacity: .5; pointer-events: none;
   }
-  .contact-form textarea { resize: vertical; min-height: 110px; }
-  .contact-form input::placeholder, .contact-form textarea::placeholder { color: var(--muted); }
-  .contact-form input:focus, .contact-form textarea:focus { border-color: var(--cyan); box-shadow: 0 0 20px rgba(0,240,255,.25); }
-  .contact-form button {
-    align-self: flex-start; padding: 14px 26px; border: none; border-radius: 12px; cursor: pointer;
-    font-family: 'Orbitron'; font-size: 13px; letter-spacing: .16em; font-weight: 700; color: #04121a;
+  .contact h2 { font-family: 'Orbitron'; font-weight: 800; font-size: clamp(24px, 3.4vw, 34px); margin: 2px 0; }
+  .contact p { color: var(--muted); font-size: 16px; line-height: 1.7; max-width: 560px; }
+  .contact-btn {
+    display: inline-flex; align-items: center; gap: 10px; margin-top: 16px; padding: 15px 30px;
+    border-radius: 12px; text-decoration: none; font-family: 'Orbitron'; font-size: 14px;
+    letter-spacing: .16em; font-weight: 700; color: #04121a;
     background: linear-gradient(100deg, var(--cyan), var(--violet));
+    box-shadow: 0 0 26px rgba(0,240,255,.4); transition: box-shadow .2s ease, transform .2s ease;
   }
+  .contact-btn:hover { box-shadow: 0 0 40px rgba(0,240,255,.6); transform: translateY(-2px); }
 
   footer { margin-top: 70px; text-align: center; color: var(--muted); font-size: 13px; letter-spacing: .18em; }
   footer .line { height: 1px; width: 220px; margin: 0 auto 22px; background: linear-gradient(90deg, transparent, var(--cyan), transparent); }
@@ -196,7 +194,6 @@
     .hero { margin-top: 36px; }
     .status { display: none; }
     .word-inner, .contact-inner { padding: 30px 24px; }
-    .contact-inner { grid-template-columns: 1fr; }
     .word-badge { display: none; }
     .label { font-size: 9px; padding: 5px 9px; }
   }
@@ -270,21 +267,10 @@
 
     <section class="contact" id="contact">
       <div class="contact-inner">
-        <div class="contact-copy">
-          <div class="word-eyebrow">Get In Touch</div>
-          <h2>Contact Us</h2>
-          <p>Questions, prayer requests, or a partnership idea — we'd love to hear from you.</p>
-          <div class="contact-links">
-            <a href="mailto:hello@cjslines.com">hello@cjslines.com</a>
-            <a href="https://wa.me/6582683372">WhatsApp · +65 8268 3372</a>
-          </div>
-        </div>
-        <form class="contact-form" action="mailto:hello@cjslines.com" method="post" enctype="text/plain">
-          <input type="text" name="name" placeholder="Your name" required />
-          <input type="email" name="email" placeholder="Your email" required />
-          <textarea name="message" placeholder="How can we help?" required></textarea>
-          <button type="submit">Send Message →</button>
-        </form>
+        <div class="word-eyebrow">Get In Touch</div>
+        <h2>We'd love to hear from you</h2>
+        <p>Questions, prayer requests, partnerships, or just a hello — send us a message and we'll get back to you soon.</p>
+        <a class="contact-btn" href="https://docs.google.com/forms/d/e/1FAIpQLScwnJIiJw8EbvaO4LnuN0d7q1n53QZRct0Dk8OZ_4HHh27iDw/viewform" target="_blank" rel="noopener">Send a Message →</a>
       </div>
     </section>
 
@@ -584,10 +570,21 @@
       const panelRect = panel.getBoundingClientRect();
       const mx = stageRect.left - secRect.left + selX;
       const my = stageRect.top - secRect.top + selY;
-      const px = panelRect.left - secRect.left;
-      const py = panelRect.top - secRect.top + panelRect.height / 2;
-      const c = Math.max(50, Math.min(120, Math.abs(px - mx) * 0.4));
-      connPath.setAttribute('d', `M ${mx} ${my} C ${mx + c} ${my}, ${px - c} ${py}, ${px} ${py}`);
+      const panelBelow = panelRect.top >= stageRect.bottom - 12;
+      let px, py, d;
+      const c = Math.max(50, Math.min(120, Math.abs(panelRect.left - stageRect.left) * 0.4));
+      if (panelBelow) {
+        // phone / stacked layout: arrow lands on the TOP of the card
+        px = panelRect.left - secRect.left + panelRect.width / 2;
+        py = panelRect.top - secRect.top;
+        d = `M ${mx} ${my} C ${mx} ${my + c}, ${px} ${py - c}, ${px} ${py}`;
+      } else {
+        // desktop: arrow lands on the LEFT edge of the card
+        px = panelRect.left - secRect.left;
+        py = panelRect.top - secRect.top + panelRect.height / 2;
+        d = `M ${mx} ${my} C ${mx + c} ${my}, ${px - c} ${py}, ${px} ${py}`;
+      }
+      connPath.setAttribute('d', d);
       connPath.style.opacity = selBehind ? 0 : 0.9;
       connParticles.style.opacity = selBehind ? 0 : 1;
       connDot.setAttribute('cx', px);
