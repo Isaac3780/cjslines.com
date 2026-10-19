@@ -158,32 +158,8 @@
   .visit:hover { box-shadow: 0 10px 28px rgba(8,145,178,.55); }
   .visit.ghost { background: transparent; color: var(--cyan); border: 1px solid rgba(8,145,178,.5); box-shadow: none; }
 
-  /* word + contact */
-  .word { margin-top: 74px; }
-  .word-inner {
-    position: relative; overflow: hidden; border-radius: 24px; padding: 46px 44px;
-    background: linear-gradient(150deg, rgba(255,255,255,.82), rgba(255,255,255,.62));
-    border: 1px solid rgba(8,145,178,.35); box-shadow: 0 24px 60px rgba(30,60,110,.14);
-    backdrop-filter: blur(8px);
-  }
-  .word-inner::before {
-    content: ''; position: absolute; inset: 0; border-radius: 24px; padding: 1px;
-    background: linear-gradient(140deg, rgba(8,145,178,.9), transparent 45%, transparent 60%, rgba(192,38,211,.8));
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor; mask-composite: exclude; opacity: .55; pointer-events: none;
-  }
+  /* contact */
   .word-eyebrow { font-family: 'Orbitron'; font-size: 11px; letter-spacing: .5em; color: var(--cyan); text-transform: uppercase; }
-  .word h2 { font-family: 'Orbitron'; font-weight: 800; font-size: clamp(24px, 3.4vw, 34px); line-height: 1.15; margin: 16px 0 16px; }
-  .word p { color: var(--muted); font-size: 16px; line-height: 1.7; max-width: 640px; }
-  .word-btn {
-    display: inline-flex; align-items: center; gap: 10px; margin-top: 26px; padding: 14px 24px;
-    border-radius: 12px; text-decoration: none; font-family: 'Orbitron'; font-size: 13px;
-    letter-spacing: .16em; font-weight: 700; color: #04121a;
-    background: linear-gradient(100deg, var(--cyan), var(--violet));
-    box-shadow: 0 0 26px rgba(0,240,255,.4); transition: box-shadow .2s ease;
-  }
-  .word-btn:hover { box-shadow: 0 0 40px rgba(0,240,255,.6); }
-  .word-badge { position: absolute; right: 34px; top: 50%; transform: translateY(-50%); font-family: 'Orbitron'; font-size: 120px; color: rgba(8,145,178,.1); }
 
   .contact { margin-top: 40px; }
   .contact-inner {
@@ -225,8 +201,7 @@
   @media (max-width: 760px) {
     .hero { margin-top: 36px; }
     .status { display: none; }
-    .word-inner, .contact-inner { padding: 30px 24px; }
-    .word-badge { display: none; }
+    .contact-inner { padding: 30px 24px; }
     .label { font-size: 9px; padding: 5px 9px; }
   }
 </style>
@@ -286,16 +261,6 @@
         <div class="meta" id="pChips"></div>
         <a class="visit" id="pVisit" href="#" target="_blank" rel="noopener">Visit Site →</a>
       </aside>
-    </section>
-
-    <section class="word" id="word">
-      <div class="word-inner">
-        <div class="word-eyebrow">A Word To Ponder</div>
-        <h2>Brethren, Are We Truly Living Out Our Calling?</h2>
-        <p>A reflective call to examine whether our faith has become routine. We fill services and buildings, yet the lost outside remain unreached. God's heart is for the lost — like the shepherd who leaves the ninety-nine for the one. We are saved to serve, loved to love, and called to make disciples, not just attendees. May we step beyond the four walls to reach the hurting, forgotten, and lost.</p>
-        <a class="word-btn" href="message.html?vibe=globe">Read the Full Message →</a>
-        <div class="word-badge">✝</div>
-      </div>
     </section>
 
     <section class="contact" id="contact">
