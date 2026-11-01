@@ -560,7 +560,7 @@
       tex.needsUpdate = true;
       const mat = new THREE.MeshBasicMaterial({ map: tex, transparent: true, side: THREE.DoubleSide, depthTest: true });
       const plane = new THREE.Mesh(new THREE.PlaneGeometry(0.55, 0.55), mat);
-      const ang = (i / ringText.length) * Math.PI * 2;
+      const ang = Math.PI - (i / ringText.length) * Math.PI * 2;
       const x = ringR * Math.cos(ang);
       const z = ringR * Math.sin(ang);
       plane.position.set(x, 0, z);
