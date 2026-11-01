@@ -692,7 +692,7 @@
     const tmp = new THREE.Vector3();
     function animate() {
       requestAnimationFrame(animate);
-      if (autoRotate) targetRotY += 0.0018;
+      if (autoRotate) targetRotY -= 0.0018;
       globe.rotation.y += (targetRotY - globe.rotation.y) * 0.08;
       globe.rotation.x += (targetRotX - globe.rotation.x) * 0.08;
 
