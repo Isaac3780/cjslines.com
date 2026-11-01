@@ -543,7 +543,7 @@
 
     // ---- "SINGAPORE" text ring around the equator (Universal Studios style) ----
     const ringText = 'SINGAPORE';
-    const ringR = 1.6;
+    const ringR = 1.18;
     ringText.split('').forEach((ch, i) => {
       const cv = document.createElement('canvas');
       cv.width = 512; cv.height = 512;
@@ -559,7 +559,7 @@
       const tex = new THREE.CanvasTexture(cv);
       tex.needsUpdate = true;
       const mat = new THREE.MeshBasicMaterial({ map: tex, transparent: true, side: THREE.DoubleSide, depthTest: true });
-      const plane = new THREE.Mesh(new THREE.PlaneGeometry(0.85, 0.85), mat);
+      const plane = new THREE.Mesh(new THREE.PlaneGeometry(0.55, 0.55), mat);
       const ang = (i / ringText.length) * Math.PI * 2;
       const x = ringR * Math.cos(ang);
       const z = ringR * Math.sin(ang);
